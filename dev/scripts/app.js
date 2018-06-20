@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // need a 9x9 cell 
-// rows x, colums y and squares (3x3) need to all have different numbers 
+// rows x, colums y and squares (3x3) need to all have different identifying numbers  
 // the cells that have 0 are empty and the user can enter a number of their choice to fill the puzzle
 // the cells that have numbers pre loaded are frozen and the user cant change input 
 // need 9 empty arrays to hold all the numbers that are in the 3x3 cells, 9 arrays to hold the numbers in the 9 rows and for the columns too
@@ -45,7 +45,7 @@ class App extends React.Component {
               <div className="row">
               {number.map((cell) => {
                   return (
-                    cell == 0 ? <input className="number" type="text" placeholder="" /> : <input className="number" type="text" placeholder={cell} />
+                    cell == 0 ? <input className="number" type="text" placeholder="" /> : <input className="number" type="text" value={cell} disabled={true}/>
                   )
                 })}
               </div>
