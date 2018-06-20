@@ -1,9 +1,22 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// need a 9x9 cell
-// rows colums and squares need to all have different numbers 
-  // set the state to an empty array and then push in the numbers as the user enters them to monitor if the squares and columns all have different numbers, 
+// need a 9x9 cell 
+// rows x, colums y and squares (3x3) need to all have different numbers 
+// the cells that have 0 are empty and the user can enter a number of their choice to fill the puzzle
+// the cells that have numbers pre loaded are frozen and the user cant change input 
+// need 9 empty arrays to hold all the numbers that are in the 3x3 cells, 9 arrays to hold the numbers in the 9 rows and for the columns too
+  // use a function to check hold the numbers that are already in the squares the rows and one for the colums to see if that number is already used
+
+// to check same 3x3 square for the number, make function to check the column that number is in
+    // check the square by using num <=3, num => 4 & <= 6, num => 7 & <= 9, it will check the nubmer the user is entering from the corresponding array for the 3x3 square
+        // then evaluate if the number they are entering is already used in that 3x3 section of the grid
+        // then push that number to that array and iterate over that array to check if the number has been used already
+    
+// when the user hits done, to check their numbers, in the 3x3 squares, the columns and rows, add up all the numbers in each of the arrays that we made and if they all equal 45 then the user has solved the puzzle correctly
+
+//when user hits play again button the sudoku array is sent through a Math.floor randomizer 
 
 const sudoku = [
   [0, 0, 3, 0, 2, 0, 6, 0, 0],
@@ -17,70 +30,25 @@ const sudoku = [
   [0, 0, 5, 0, 1, 0, 3, 0, 0],
 ]
 
-const cell = []
-
 class App extends React.Component {
   constructor() {
     super();
-    this.state ({ 
-      board: ''
-    })
-    this.gameBoard = this.gameBoard.bind(this);
+ 
   }
-
-  // a = x axis
-  // b = y axis
-  gameBoard() {
-    let a = 0;
-    let b = 0;
-    for (let i = 0; i < 81 ; i ++) {
-      cell[i] = new cell(a, b, i, sudoku[i])
-      a = a + 50;
-      if (i % 9 == 0 && i !== 0) {
-        b = b + 50;
-        a = 0;
-      }
-      console.log(sudoku[i]);
-    }
-    this.setState({
-      board: call[i]
-    })
-  }
-
-  draw() {
-    background(51);
-    for (let i = 0; i < 81; i++) {
-      cell[i].show();
-    }
-  }
-
-  // cell(a,b,i,num) {
-  //   this.a = a;
-  //   this.b = b;
-  //   this.i = i;
-  //   this.num = num;
-  //   // the border 
-  //   this.show = () => {
-  //     noFill();
-  //     stroke(255);
-  //     rec(this.a, this.b, 50, 50);
-  //     fill(255);
-  //     textSize(32);
-  //   }
-  // }
 
   render() {
     return (
       <div>
-        
         <div>
-          {/* <label display={this.board}></label> */}
-          {this.state.gameBoard.map((number) => {
-            console.log(number);
-            return (
-              <div className="number">
-                {number}
-                </div>
+          {sudoku.map((number) => {
+            return(
+              <div className="row">
+              {number.map((cell) => {
+                  return (
+                    cell == 0 ? <input className="number" type="text" placeholder="" /> : <input className="number" type="text" placeholder={cell} />
+                  )
+                })}
+              </div>
             )
           })}
         </div>
@@ -89,5 +57,6 @@ class App extends React.Component {
     )
   }
 }
+
 
 ReactDOM.render(<App />, document.getElementById('app'));

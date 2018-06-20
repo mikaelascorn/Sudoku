@@ -1,5 +1,12 @@
-div .number {
-  padding: 20px;
+div .row {
+  display: flex;
+  input {
+     width: 50px 
+  }
+  .number {
+    padding: 10px 20px;
+    border: 1px solid black;
+  }
 }
   
 
